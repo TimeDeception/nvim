@@ -66,7 +66,11 @@ else
 	--------------------------------------------------------
 	-- LAPTOP
 	--------------------------------------------------------
+  ---
 
+  vim.opt.equalalways = false
+  vim.opt.splitright = true
+  vim.opt.splitbelow = true
 	vim.opt.termguicolors = true
 	vim.opt.showtabline = 2
 

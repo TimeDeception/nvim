@@ -6,6 +6,7 @@ M.base_dirs = {
 	vim.fn.expand("~/code"),
 	vim.fn.expand("~/workspace"),
   vim.fn.expand("~/Desktop"),
+  vim.fn.expand("./Documents"),
   vim.fn.expand("~/.config/nvim"),
   vim.fn.expand("~/.config"),
 }

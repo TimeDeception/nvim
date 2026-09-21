@@ -1,3 +1,5 @@
+local startup = require("core.startup")
+
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -12,7 +14,10 @@ return {
 			{ "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle file tree" },
 		},
 		opts = {
+			close_if_last_window = true,
+			window = { position = "left", width = 32 },
 			filesystem = {
+				follow_current_file = { enabled = true }, -- highlights the file you're editing
 				filtered_items = {
 					visible = true,
 					hide_dotfiles = false,
@@ -44,38 +49,41 @@ return {
 		end,
 	},
 
-{
-	"nvimdev/dashboard-nvim",
-	event = "VimEnter",
-	config = function()
-		local db = require("dashboard")
-		local workspace = require("core.workspace.switch")
+	{
+		"nvimdev/dashboard-nvim",
+		-- Only auto-open on startup when we're NOT inside a project.
+		-- `cmd` keeps <leader>; (:Dashboard) working in project sessions.
+		event = startup.show_dashboard() and "VimEnter" or nil,
+		cmd = "Dashboard",
+		config = function()
+			local db = require("dashboard")
+			local workspace = require("core.workspace.switch")
 
-		db.setup({
-			theme = "hyper",
+			db.setup({
+				theme = "hyper",
 
-			config = {
-				shortcut = {
-					{
-						desc = "Projects",
-						group = "Label",
-						action = function()
-							require("core.workspace.telescope").pick()
+				config = {
+					shortcut = {
+						{
+							desc = "Projects",
+							group = "Label",
+							action = function()
+								require("core.workspace.telescope").pick()
+							end,
+							key = "p",
+						},
+					},
+
+					project = {
+						enable = true,
+						action = function(path)
+							workspace.open_project(path)
 						end,
-						key = "p",
 					},
 				},
-
-				project = {
-					enable = true,
-					action = function(path)
-						workspace.open_project(path)
-					end,
-				},
-			},
-		})
-	end,
-},
+			})
+		end,
+	},
 
 	{
 		"rcarriga/nvim-notify",
