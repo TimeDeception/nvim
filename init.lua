@@ -59,6 +59,8 @@ vim.lsp.buf.format({
 -- Bootstrap (IMPORTANT)
 -- session + runtime autocmds live here
 ------------------------------------------------------------
+require("core.startup").setup()
+
 require("core.bootstrap")
 
 ------------------------------------------------------------

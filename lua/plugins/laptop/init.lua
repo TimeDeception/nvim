@@ -3,7 +3,6 @@ return {
 	require("plugins.laptop.treesitter"),
 	require("plugins.laptop.ui"),
 	require("plugins.laptop.git"),
-	require("plugins.laptop.terminal"),
 	require("plugins.laptop.themes"),
 	require("plugins.laptop.icons"),
 	require("plugins.laptop.lsp"),
