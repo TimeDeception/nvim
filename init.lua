@@ -29,6 +29,11 @@ vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.hlsearch = true
+-- only use OSC 52 when connected over SSH
+if vim.env.SSH_TTY then
+  vim.g.clipboard = 'osc52'
+end
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
